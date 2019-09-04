@@ -1,18 +1,29 @@
 <template>
     <div id="app">
-        <h1>list of repositories</h1>
-        <ul>
-            <li v-for="(repo, index) in listOfRepos"
-                :key="index">
-                <h2>{{repo.name}}</h2>
-                <h4>{{repo.description}}</h4>
-                <a :href="repo.html_url">Link</a>
-            </li>
-        </ul>
+        <b-container>
+            <b-navbar sticky
+                type="dark"
+                variant="dark">
+                <b-navbar-brand href="https://github.com/neknek25251989?tab=repositories">List of Lo Whai-Jer's repositories</b-navbar-brand>
+            </b-navbar>
+            <b-card-group>
+                <b-card v-for="(repo, index) in listOfRepos"
+                    :key="index"
+                    style="min-width: 400px;">
+                    <b-card-body>
+                        <b-card-title>{{repo.name}}</b-card-title>
+                        <b-card-text>{{repo.description}}</b-card-text>
+                        <b-button :href="repo.html_url"
+                            variant="primary">Link</b-button>
+                    </b-card-body>
+                </b-card>
+            </b-card-group>
+        </b-container>
     </div>
 </template>
 
 <script>
+    import { BNavbar, BNavbarBrand, BContainer, BCardGroup, BCard, BCardBody, BCardTitle, BCardText, BButton } from 'bootstrap-vue'
     export default {
         name: 'app',
         data() {
@@ -20,7 +31,17 @@
                 listOfRepos: []
             }
         },
-
+        components: {
+            BNavbar,
+            BNavbarBrand,
+            BContainer,
+            BCardGroup,
+            BCard,
+            BCardBody,
+            BCardTitle,
+            BCardText,
+            BButton
+        },
         mounted() {
             this.fetch();
         },
